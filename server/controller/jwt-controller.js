@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import Token from '../model/token.js';
 
 dotenv.config();
-
 export const authenticateToken = (request, response, next) => {
     const authHeader = request.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -30,7 +29,6 @@ export const createNewToken = async (request, response) => {
     if (!refreshToken) {
         return response.status(401).json({ msg: 'Refresh token is missing' })
     }
-
     const token = await Token.findOne({ token: refreshToken });
 
     if (!token) {
